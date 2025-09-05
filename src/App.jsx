@@ -2,23 +2,29 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
+import { Header } from './components'
 
 
 const Content = styled.div`
-  padding: 120px 0;
+  margin: 150px 0 0 0;
 `
 const H2 = styled.h2`
   text-align: center;
   margin-bottom: 20px;
 `
+const AppColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  width: 1100px;
+  background: #9e9d9dff;
+  color: #333;
+  margin: 0 auto;
+`
 
-const Header = () => {
-  return (
-    <>
-    <h1>Header</h1>
-    </>
-  )
-}
+
+
 
 const Footer = () => {
   return (
@@ -41,8 +47,9 @@ export const  Blog = () => {
 
   return (
     <>
-    <Header></Header>
-
+    <Header />
+     <AppColumn>
+    
     <Content>
        <i className="fa fa-address-book" aria-hidden="true"></i>  
        {name}
@@ -58,7 +65,9 @@ export const  Blog = () => {
     </Content>
   
     <Footer></Footer>
+    </AppColumn>
     </>
+   
   )
 }
 
