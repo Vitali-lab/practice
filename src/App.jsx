@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
-import { Header } from './components'
+import { Header, Footer } from './components'
+
 
 
 const Content = styled.div`
@@ -26,13 +27,6 @@ const AppColumn = styled.div`
 
 
 
-const Footer = () => {
-  return (
-    <>
-    <h1>Footer</h1>
-    </>
-  )
-}
 
 export const  Blog = () => {
 
@@ -63,12 +57,13 @@ export const  Blog = () => {
         <Route path='*' element ={<div>Ошибка</div>}/>
        </Routes>
     </Content>
-  
-    <Footer></Footer>
     </AppColumn>
+    <Footer />
     </>
    
   )
 }
+
+
 
 
