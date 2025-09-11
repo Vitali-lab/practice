@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{keyframes} from "styled-components";
 import { ControlPanel, Logo } from "./components";
 
 
@@ -14,9 +14,19 @@ const Discription = styled.div`
     color: #8b92e7ff;
   }
 `
+const fadeIn = keyframes`
+  0% {
+    
+    transform: translateY(-120px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 
-export const HeaderContainer = ({ className }) => {
+ const HeaderContainer = ({ className }) => {
   return (
     <header className={className}>
       <Logo />
@@ -40,5 +50,6 @@ export const Header = styled(HeaderContainer)`
   box-shadow: 0 2px 10px rgba(20, 20, 20, 0.75);
   width: 100%;
   z-index: 100;
+  animation: ${fadeIn} 0.6s ease-in-out;
   
 `;
