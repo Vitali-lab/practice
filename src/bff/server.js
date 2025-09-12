@@ -34,16 +34,16 @@ export const server = {
     };
   },
   async register(redLogin, redPassword) {
-    const user = await getUser(redLogin);
+    const existedUser = await getUser(redLogin);
 
-    if (user) {
+    if (existedUser) {
       return {
         error: "Такой логин уже зарегистрирован",
         res: null,
       };
     }
 
-    await createUser(redLogin, redPassword);
+    const user = await createUser(redLogin, redPassword);
 
     return {
       error: null,

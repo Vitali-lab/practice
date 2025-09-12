@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
 import { Header, Footer } from './components'
 import { Auth } from './pages/authorization/Auth'
+import { Registration } from './pages/registration/Registration'
 
 
 
@@ -45,7 +46,7 @@ export const  Blog = () => {
        <Routes>
         <Route path='/' element ={<div>Главная</div>}/>
         <Route path='/login' element ={<Auth />}/>
-        <Route path='/register' element ={<div>Регистрация</div>}/>
+        <Route path='/register' element ={<Registration/>}/>
         <Route path='/users' element ={<div>Пользователи</div>}/>
         <Route path='/post' element ={<div>Новая статья</div>}/>
         <Route path='/post/:postId' element ={<div>Статья</div>}/>

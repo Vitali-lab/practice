@@ -1,18 +1,20 @@
+
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { server } from "../../bff/server";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input,Button,ErrorMassage } from "../../components";
 import { Link, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import styled  from "styled-components";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { setUser } from "../../actions";
 import {selectUserRole} from "../../selectors"
 import { ROLE } from "../../bff/constants/role";
 import { useResetAuthForm } from "../../hooks";
-import styled from "styled-components";
 
-const authFormSchema = yup.object().shape({
+
+const registrationFormSchema = yup.object().shape({
     login: 
     yup.string()
     .required("Введите логин")
@@ -25,6 +27,10 @@ const authFormSchema = yup.object().shape({
     .matches(/^[\w#%]+$/, "Пароль должен состоять только из букв, цифр и символов # и %")
     .min(6, "Пароль должен содержать минимум 6 символов")
     .max(30, "Пароль должен содержать максимум 30 символов"),
+    passcheck: 
+    yup.string()
+    .required("Введите пароль повторно")
+    .oneOf([yup.ref("password"), null], "Пароли не совпадают")
 
 });
 
@@ -43,10 +49,11 @@ const AuthForm = styled.form`
 
 
 
-export const AuthContainer = ( { className }) => {
+export const RegistrationContainer = ( { className }) => {
 
     const dispatch = useDispatch();
     const role = useSelector(selectUserRole);
+    const [serverError, setServerError] = useState(null);
 
 
 
@@ -58,15 +65,15 @@ export const AuthContainer = ( { className }) => {
         defaultValues: {
             login: "",
             password: "",
+            passcheck: "",
         } ,
-        resolver: yupResolver(authFormSchema),
+        resolver: yupResolver(registrationFormSchema),
     });
 
-  useResetAuthForm(reset)
+    useResetAuthForm(reset)
 
-    const [serverError, setServerError] = useState(null);
     const onSubmit = ({login , password}) => {
-        server.auth(login, password)
+        server.register(login, password)
         .then(({error, res}) => {
             if(error) {
                 setServerError(`Ошибка запроса ${error}`);
@@ -78,7 +85,7 @@ export const AuthContainer = ( { className }) => {
 
     }
 
-    const formError = errors?.login?.message || errors?.password?.message;
+    const formError = errors?.login?.message || errors?.password?.message || errors?.passcheck?.message
     const errorMessage =  formError || serverError; 
 
 
@@ -89,7 +96,7 @@ export const AuthContainer = ( { className }) => {
 
     return (
         <div className={className}>
-         <h2>Авторизация</h2>
+         <h2>Регистрация</h2>
          <AuthForm onSubmit={handleSubmit(onSubmit)}>
             <Input type="text" 
             placeholder="Логин" 
@@ -101,16 +108,21 @@ export const AuthContainer = ( { className }) => {
             {...register("password",{
                 onChange: () => setServerError(null) 
             })} />
-            <Button type="submit" disabled={!!formError} >Войти  <i className="fa fa-sign-in"/></Button>
+             <Input type="password" 
+            placeholder="Повторите пароль" 
+            {...register("passcheck",{
+                onChange: () => setServerError(null) 
+            })} />
+            <Button type="submit" disabled={!!formError} > Зарегестрироваться  <i className="fa fa-sign-in"/></Button>
             {errorMessage && <ErrorMassage>{errorMessage}</ErrorMassage>}
-            <Button><Link to="/register">Регистрация <i className="fa fa-user-plus"/></Link></Button>
+            <Button><Link to="/login">Войти <i className="fa fa-user-plus"/></Link></Button>
             
          </AuthForm>
 
         </div>
     )
 }
-export const Auth = styled(AuthContainer)`
+export const Registration = styled(RegistrationContainer)`
     display: flex;
     flex-direction: column;
     align-items: center;
