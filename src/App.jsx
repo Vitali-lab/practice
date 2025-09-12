@@ -1,29 +1,69 @@
-
+import { useEffect, useState } from 'react'
 import './App.css'
 import styled from 'styled-components'
+import { Route, Routes } from 'react-router-dom'
+import { Header, Footer } from './components'
+import { Auth } from './pages/authorization/Auth'
+import { Registration } from './pages/registration/Registration'
+import { Users } from './pages/users/Users'
 
-const Container = styled.div`
+
+
+const Content = styled.div`
+  margin: 150px 0 0 0;
+  
+`
+const H2 = styled.h2`
+  text-align: center;
+  margin-bottom: 20px;
+`
+const AppColumn = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
-  width: 100%;
-  height: 100vh;
-    color: #61dafb;
+  min-height: 100vh;
+  justify-content: space-between;
+  width: 1200px;
+  background: #b8b8b8ff;
+  color: #333;
+  margin: 0 auto;
 `
 
-function App() {
+
+
+export const  Blog = () => {
+
+  const [name, setName] = useState('')
+
+
 
 
   return (
-    <>
-    <Container>
-       <i className="fa fa-address-book" aria-hidden="true"></i>  
-    </Container>
     
-    </>
+   <>
+    <AppColumn>
+    <Header />
+    <Content>
+       <Routes>
+        <Route path='/' element ={<div>Главная</div>}/>
+        <Route path='/login' element ={<Auth />}/>
+        <Route path='/register' element ={<Registration/>}/>
+        <Route path='/users' element ={<Users/>}/>
+        <Route path='/post' element ={<div>Новая статья</div>}/>
+        <Route path='/post/:postId' element ={<div>Статья</div>}/>
+        <Route path='*' element ={<div>Ошибка</div>}/>
+       </Routes>
+    </Content>
+    <Footer />
+    </AppColumn>
+    
+   </>
+    
+   
+   
   )
 }
 
-export default App
+
+
+
