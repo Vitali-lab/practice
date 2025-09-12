@@ -2,12 +2,12 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { server } from "../../bff/server";
-import { useEffect, useState } from "react";
+import { server } from "../../bff";
+import { useState } from "react";
 import { Input,Button,ErrorMassage } from "../../components";
 import { Link, Navigate } from "react-router-dom";
 import styled  from "styled-components";
-import { useDispatch, useStore, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../actions";
 import {selectUserRole} from "../../selectors"
 import { ROLE } from "../../bff/constants/role";

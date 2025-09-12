@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Header, Footer } from './components'
 import { Auth } from './pages/authorization/Auth'
 import { Registration } from './pages/registration/Registration'
+import { Users } from './pages/users/Users'
 
 
 
@@ -47,7 +48,7 @@ export const  Blog = () => {
         <Route path='/' element ={<div>Главная</div>}/>
         <Route path='/login' element ={<Auth />}/>
         <Route path='/register' element ={<Registration/>}/>
-        <Route path='/users' element ={<div>Пользователи</div>}/>
+        <Route path='/users' element ={<Users/>}/>
         <Route path='/post' element ={<div>Новая статья</div>}/>
         <Route path='/post/:postId' element ={<div>Статья</div>}/>
         <Route path='*' element ={<div>Ошибка</div>}/>

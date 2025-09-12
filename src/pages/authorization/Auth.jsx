@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { server } from "../../bff/server";
+import { server } from "../../bff";
 import { useState } from "react";
 import { Input,Button,ErrorMassage } from "../../components";
 import { Link, Navigate } from "react-router-dom";
