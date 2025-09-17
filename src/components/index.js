@@ -4,3 +4,4 @@ export * from "./button/Button";
 export * from "./input/Input";
 export * from "./error/auth-error";
 export * from "./Icon/Icon";
+export * from "./content/Content";

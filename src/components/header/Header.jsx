@@ -9,14 +9,14 @@ const Discription = styled.div`
   font-weight: semibold;
   letter-spacing: 4px;
   text-align: left;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.5s ease-in-out;
   &:hover {
     color: #8b92e7ff;
   }
 `
 const fadeIn = keyframes`
   0% {
-    
+    opacity: 0;
     transform: translateY(-120px);
   }
   100% {
@@ -51,5 +51,6 @@ export const Header = styled(HeaderContainer)`
   width: 100%;
   z-index: 100;
   animation: ${fadeIn} 0.6s ease-in-out;
+  border-radius: 0 0 20px 20px;
   
 `;

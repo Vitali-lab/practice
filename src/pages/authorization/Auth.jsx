@@ -66,6 +66,7 @@ export const AuthContainer = ( { className }) => {
 
     const [serverError, setServerError] = useState(null);
     const onSubmit = ({login , password}) => {
+        
         server.auth(login, password)
         .then(({error, res}) => {
             if(error) {

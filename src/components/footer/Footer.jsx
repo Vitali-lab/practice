@@ -15,11 +15,12 @@ const Weather1 = styled.div`
 
 const fadeIn = keyframes`
   0% {
-    transform: translateY(120px);
+    opacity: 0;
+   
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    
   }
 `;
 
@@ -79,6 +80,7 @@ align-items: center;
 justify-content: space-between;
 box-shadow: 0 2px 10px rgba(20, 20, 20, 0.75);
 z-index: 100;
+border-radius: 20px 20px 0 0;
 animation: ${fadeIn} 0.6s ease-in-out;
 `
 

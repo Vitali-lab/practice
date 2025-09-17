@@ -8,17 +8,17 @@
       "role_id": 0
     },
     {
-      "id": "7806",
-      "login": "qweqwe",
-      "password": "123123",
-      "registered_at": "2025-09-11 13:50",
+      "id": "2",
+      "login": "Victor",
+      "password": "123456",
+      "registered_at": "2018-01-01",
       "role_id": 2
     },
     {
-      "id": "4592",
+      "id": "3",
       "login": "Vitali2",
-      "password": "123123",
-      "registered_at": "2025-09-11 13:56",
+      "password": "123456",
+      "registered_at": "2018-01-01",
       "role_id": 2
     }
   ],
@@ -28,11 +28,11 @@
       "name": "Администратор"
     },
     {
-      "id": "1",
+      "id": "2",
       "name": "Читатель"
     },
     {
-      "id": "2",
+      "id": "1",
       "name": "Модератор"
     },
     {

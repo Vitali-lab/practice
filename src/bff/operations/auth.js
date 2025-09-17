@@ -4,7 +4,7 @@ import { sessions } from "../sessions";
 export const auth = async (authLogin, authPassword) => {
   const user = await getUser(authLogin);
 
-  const { id, login, role_id: roleId, password } = user;
+  const { id, login, password, role_id } = user;
 
   if (!user) {
     return {
@@ -23,9 +23,9 @@ export const auth = async (authLogin, authPassword) => {
   return {
     error: null,
     res: {
-      id,
-      login,
-      roleId,
+      id: id,
+      login: login,
+      roleId: role_id,
       session: sessions.create(user),
     },
   };

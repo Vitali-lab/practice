@@ -9,7 +9,7 @@ import { Users } from './pages/users/Users'
 
 
 
-const Content = styled.div`
+const Page = styled.div`
   margin: 150px 0 0 0;
   
 `
@@ -24,7 +24,7 @@ const AppColumn = styled.div`
   min-height: 100vh;
   justify-content: space-between;
   width: 1200px;
-  background: #b8b8b8ff;
+  background: #cbcaffef;
   color: #333;
   margin: 0 auto;
 `
@@ -43,7 +43,7 @@ export const  Blog = () => {
    <>
     <AppColumn>
     <Header />
-    <Content>
+    <Page>
        <Routes>
         <Route path='/' element ={<div>Главная</div>}/>
         <Route path='/login' element ={<Auth />}/>
@@ -53,7 +53,7 @@ export const  Blog = () => {
         <Route path='/post/:postId' element ={<div>Статья</div>}/>
         <Route path='*' element ={<div>Ошибка</div>}/>
        </Routes>
-    </Content>
+    </Page>
     <Footer />
     </AppColumn>
     

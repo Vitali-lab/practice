@@ -1,8 +1,8 @@
-import { getRoles } from "../api/get-roles";
 import { sessions } from "../sessions";
 import { ROLE } from "../constants";
+import { deleteUser } from "../api";
 
-export const fetchRoles = async (userSession) => {
+export const removeUser = async (userSession, userId) => {
   const accessRoles = [ROLE.ADMIN];
 
   if (!sessions.access(userSession, accessRoles)) {
@@ -12,10 +12,9 @@ export const fetchRoles = async (userSession) => {
     };
   }
 
-  const roles = await getRoles();
-
+  deleteUser(userId);
   return {
     error: null,
-    res: roles,
+    res: true,
   };
 };
