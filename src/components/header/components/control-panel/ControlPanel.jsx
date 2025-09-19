@@ -37,7 +37,11 @@ const UserName = styled.div`
     const login = useSelector(selectUserLogin);
     const dispatch = useDispatch();
     const session = useSelector(selectUserSession);
-
+    
+    const onLogOut = () => {
+      dispatch(logout(session))
+      sessionStorage.removeItem('userData');
+    }
     
     return (
         <div className={className}>
@@ -45,9 +49,7 @@ const UserName = styled.div`
            {roleId === ROLE.GUEST  ? (<Link to="/login"><Button>Войти</Button></Link>) 
            : (<>
            <UserName>{login}</UserName>
-           <Link to="/" onClick={() => {
-            dispatch(logout(session))
-            }}><Icon className="fa fa-sign-out" ></Icon></Link>
+           <Link to="/" onClick={onLogOut}><Icon className="fa fa-sign-out" /></Link>
            </>)
            }
            </RightAlignet>
