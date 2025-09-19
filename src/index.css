@@ -7,7 +7,13 @@
 
   color-scheme: light dark;
   color: rgba(14, 13, 13, 0.87);
-  background-color: #414040;
+  background-image: url(./img//bg.png);
+  background-attachment: fixed;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 * {

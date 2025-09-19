@@ -1,13 +1,20 @@
-const initialPostState = {};
+import { ACTION_TYPE } from "../actions";
+
+const initialPostState = {
+  id: "",
+  title: "",
+  imageUrl: "",
+  content: "",
+  publishedAt: "",
+  comments: [],
+};
 
 export const postReduser = (state = initialPostState, action) => {
   switch (action.type) {
-    case "AUTH": {
+    case ACTION_TYPE.SET_POST_DATA: {
       return {
         ...state,
-        isAuth: action.isAuth,
-        user: action.user,
-        serverError: action.serverError,
+        ...action.payload,
       };
     }
     default:

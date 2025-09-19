@@ -1,8 +1,8 @@
-import { getRoles } from "../api/get-roles";
-import { sessions } from "../sessions";
+import { setUserRole } from "../api";
 import { ROLE } from "../constants";
+import { sessions } from "../sessions";
 
-export const fetchRoles = async (userSession) => {
+export const updateUserRole = async (userSession, userId, newUserRole) => {
   const accessRoles = [ROLE.ADMIN];
 
   if (!sessions.access(userSession, accessRoles)) {
@@ -12,10 +12,9 @@ export const fetchRoles = async (userSession) => {
     };
   }
 
-  const roles = await getRoles();
-
+  setUserRole(userId, newUserRole);
   return {
     error: null,
-    res: roles,
+    res: true,
   };
 };

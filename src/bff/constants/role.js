@@ -1,6 +1,6 @@
 export const ROLE = {
   ADMIN: 0,
-  READER: 1,
-  MODERATOR: 2,
+  READER: 2,
   GUEST: 3,
+  MODERATOR: 1,
 };
