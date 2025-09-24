@@ -6,8 +6,9 @@ import { selectUserId  } from "../../../../selectors"
 import { useServerRequest } from "../../../../hooks"
 import { addCommentAsync } from "../../../../actions"
 import styled from "styled-components"
+import { addComment } from "../../../../bff/api"
 
-const CommentsContainer = ({className , comments, postId , content }) => {
+const CommentsContainer = ({className , comments, postId , content, author }) => {
 
     const [newComment, setNewComment] = useState('')
 
@@ -15,10 +16,12 @@ const CommentsContainer = ({className , comments, postId , content }) => {
     const dispatch = useDispatch()
     const reqestServer = useServerRequest()
 
-    const onNewCummentAdd = ( userId ,postId, content ) => { 
+    const onNewCummentAdd =  ( userId ,postId, content ) => { 
+      setNewComment('')
       dispatch(addCommentAsync(reqestServer,userId ,postId, content))
     }
-
+ 
+ 
 return ( 
     <div className={className}>
         <div className="new-comment">
@@ -30,16 +33,18 @@ return (
             id="paper-plane-o" 
             color = "#070707ff" 
             size = "25"
-            onClick={()=>{onNewCummentAdd(userId ,postId, content)}} />
+            onClick={()=>{onNewCummentAdd(userId ,postId, newComment)}} />
         </div>
         <div className="comments">
-            {comments.map(( {id , author , content,publishedAt, newComment} )=> (
+            {comments.map(( {id , author , content, published_at,  } )=> (
               <Comment 
               key={id}
               id={id} 
               author={author} 
               content={content}
-              publishedAt={publishedAt}
+              publishedAt={published_at}
+              postId={postId}
+              
               />
             ))}
         </div>
@@ -51,27 +56,43 @@ return (
 export const Comments = styled(CommentsContainer)`
 
 display: flex;
-align-items: center;
+align-items: start;
 justify-content: center;
 flex-direction: column;
 
 
+
 & .new-comment {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   gap: 20px;
   margin: 40px 0 0 0;
-  width: 580px;
+  width: 100%;
+  margin-bottom: 25px;
+  
   & textarea {
     width: 100%;
-    height: 120px;
+    height: 170px;
     resize: none;
     border-radius: 10px;
+    color:rgb(0, 0, 0);
+    background-color:  #cbcaffef;
     padding: 15px;
     font-size: 18px;
+    border: 1px solid #313131ff;
+    
     
    
+  }
+    & i {
+      color: #070707ff;
+      border-radius: 10px;
+      border: 1px solid #070707ff;
+      padding: 10px;
+      
+      
+
   }
 }
 `

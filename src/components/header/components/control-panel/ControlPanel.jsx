@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Icon } from "../../../Icon/Icon"
 import { Link, useNavigate } from "react-router-dom"
-import { Button } from "../../../button/button"
+import { Button } from "../../../button/Button"
 import { useSelector , useDispatch } from "react-redux"
 import { ROLE } from "../../../../bff/constants/role"
 import { selectUserRole } from "../../../../selectors/select-user-role"

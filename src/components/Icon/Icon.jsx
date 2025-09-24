@@ -14,7 +14,7 @@ import styled from "styled-components";
 export const Icon = styled(IconContainer)`
 font-size: ${({size = '25'}) => size}px;
 margin: ${({margin = '0'}) => margin};
-color: ${({color = '#fff',disabled}) => disabled ? '#ccc' : color}};
+color: ${({color = '#fff',disabled}) => disabled ? '#cc11c' : color}};
 text-align: center;
 transition: color 0.2s ease-in-out;
   &:hover {

@@ -78,6 +78,7 @@ flex-direction: column;
 align-items: center;
 margin-top: 100px;
 font-size: 18px;
+
     
 
 `

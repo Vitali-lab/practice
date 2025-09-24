@@ -5,7 +5,7 @@ import styled from "styled-components"
  const InputContainer = forwardRef(({className, width, ...props}, ref) => {
     return(
     
-         <input className={className} type="text" placeholder="Логин" {...props} ref={ref} />
+         <input className={className} type="text"   {...props} ref={ref} />
     
     )
 })

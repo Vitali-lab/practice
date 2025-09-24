@@ -5,3 +5,4 @@ export * from "./input/Input";
 export * from "./error/auth-error";
 export * from "./Icon/Icon";
 export * from "./content/Content";
+export * from "./modal/Modal";
