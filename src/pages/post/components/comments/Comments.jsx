@@ -59,6 +59,7 @@ display: flex;
 align-items: start;
 justify-content: center;
 flex-direction: column;
+margin-top: 50px;
 
 
 

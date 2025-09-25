@@ -1,19 +1,42 @@
-import { Icon } from "../../../../components/Icon/Icon"
+import { Icon , Modal } from "../../../../components"
 import { SpecialPanel } from "../special-panel/SpecialPanel"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { removePostAsync } from "../../../../actions" 
+import { useServerRequest } from "../../../../hooks"
 import styled from "styled-components"
 
 const PostContentContainer = ( {className, post:{id , title , imageUrl , content, publishedAt} } ) => {
 
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const requestServer = useServerRequest()
+  const [onOpenModal, setOnOpenModal] = useState(false)
+
+  
+     const openModal = () => {
+                  setOnOpenModal(true)
+              }
+              const onRemovePost =  ( id ) => {
+                    setOnOpenModal(false)
+                    dispatch(removePostAsync(requestServer, id))
+                    navigate("/")
+              }
     
 
     return( 
         <div className={className}>
-            <img src={imageUrl} alt={title}/>
+          {onOpenModal && <Modal 
+            id={id} 
+            cancel={setOnOpenModal} 
+            confirm={onRemovePost} 
+            text={"Вы действительно хотите удалить пост?"}/>
+                }
+            <img src={imageUrl || " "} alt={title}/>
             <h2>{title}</h2>
-            <SpecialPanel publishedAt={publishedAt} editButton={<Icon 
+            <SpecialPanel publishedAt={publishedAt} onDeleteButton={openModal} editButton={<Icon 
             id="pencil-square-o" 
             color = "#070707ff" 
             size = "25"

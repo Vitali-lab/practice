@@ -1,18 +1,23 @@
 import { Icon } from "../../../../components/Icon/Icon"
 import styled from "styled-components"
 
-const SpecialPanelContainer = ({className, publishedAt, editButton}) => {
+const SpecialPanelContainer = ({className, publishedAt, editButton, onDeleteButton}) => {
+
+    
     
     return(
         <div className={className}>
         <div className="special-panel">
                       <div className="published-at">
-                        <Icon id="calendar" color = "#000000ff" size = "20"/> 
+                        {publishedAt
+                        ? <>
+                        <Icon id="calendar" color = "#000000ff" size = "20" /> 
                         {publishedAt}
+                        </> : ''} 
                        </div>
                       <div className="buttons">
                         {editButton}
-                        <Icon id="trash-o" color = "#000000ff" size = "25" />
+                       {publishedAt &&  <Icon id="trash-o" color = "#000000ff" size = "25" onClick={onDeleteButton}/>}
                         </div>
                       
                     </div>

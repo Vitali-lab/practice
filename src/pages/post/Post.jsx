@@ -1,30 +1,48 @@
 import { PostContent, Comments, PostForm } from "./components"
 import { useSelector, useDispatch } from "react-redux"
 import  { useServerRequest } from "../../hooks"
-import { loadPostAsync } from "../../actions"
+import { loadPostAsync, RESET_POST_DATA } from "../../actions"
 import { selectPost } from "../../selectors"
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { useParams, useMatch } from "react-router-dom"
+import { initialPostState } from "../../redusers/post-reduser"
 import styled from "styled-components"
 const PostContainer  = ( {className} ) => {
 
     const dispatch = useDispatch()
     const params = useParams()
     const requestServer = useServerRequest()
-    const post = useSelector(selectPost)
-    const isEditing = useMatch("/post/:id/edit")
     
+    const isEditing = useMatch("/post/:id/edit")
+    const isCreating = useMatch("/post")
+    
+    useLayoutEffect(()=>{
+      dispatch(RESET_POST_DATA)
+    },[dispatch , isCreating])
+
+    const post = useSelector(selectPost)
+
     useEffect(()=>{
+      if(isCreating){
+        return
+      }
       dispatch(loadPostAsync(requestServer, params.id))
     },[dispatch,requestServer,params.id])
   
-    
+    const postState = {
+      id: "",
+      title: "",
+      imageUrl: "",
+      content: "",
+      publishedAt: "",
+      comments: [],
+    };
     
 
 return(
         <div className={className}>
-          {isEditing 
-          ? (<PostForm post={post}/>) 
+          {isCreating ||  isEditing 
+          ? (<PostForm post={isCreating ? postState : post}/>) 
           : (
             <>
             <PostContent post={post}/>
