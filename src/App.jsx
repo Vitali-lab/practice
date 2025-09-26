@@ -10,6 +10,7 @@ import { Post } from './pages/post/Post'
 import { useDispatch } from 'react-redux'
 import { setUser } from './actions'
 import { number } from 'yup'
+import { Main } from './pages/main/ Main'
 
 
 
@@ -62,7 +63,7 @@ export const  Blog = () => {
     <Header />
     <Page>
        <Routes>
-        <Route path='/' element ={<div>Главная</div>}/>
+        <Route path='/' element ={<Main/>}/>
         <Route path='/login' element ={<Auth />}/>
         <Route path='/register' element ={<Registration/>}/>
         <Route path='/users' element ={<Users/>}/>

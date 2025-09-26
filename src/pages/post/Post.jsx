@@ -42,7 +42,7 @@ const PostContainer  = ( {className} ) => {
 return(
         <div className={className}>
           {isCreating ||  isEditing 
-          ? (<PostForm post={isCreating ? postState : post}/>) 
+          ? (<PostForm post={isCreating ? initialPostState : post}/>) 
           : (
             <>
             <PostContent post={post}/>
