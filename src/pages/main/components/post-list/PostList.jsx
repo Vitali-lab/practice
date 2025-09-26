@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { Icon } from "../../../components"
+import { Icon } from "../../../../components"
 import styled from "styled-components";
 
 const PostListContainer = ({ className, post:{id , title , imageUrl , content, publishedAt , commentsCount} }) => {
@@ -29,6 +29,7 @@ const PostListContainer = ({ className, post:{id , title , imageUrl , content, p
             </div>
             </div>
             </div>
+            
         </div>
     )
 };
@@ -38,7 +39,7 @@ export const PostList = styled(PostListContainer)`
     border: 1px solid #313131ff;
     cursor: pointer;
     font-size: 10px;
-    box-shadow: 0 2px 2px rgba(20, 20, 20, 0.4);
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
     max-width: 300px
     height: 400px
     

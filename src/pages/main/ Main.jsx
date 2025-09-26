@@ -1,25 +1,32 @@
 import { Input,Icon } from "../../components"
-import { PostList } from "./components/PostList"
+import { PostList } from "./components/post-list/PostList"
+import { Pagination } from "./components/pagination/Pagination"
 import { useServerRequest } from "../../hooks"
+import { PAGINATION_LIMIT } from "../../bff/constants"
 import { useEffect,useState } from "react"
 import styled from "styled-components"
 
 const MainContainer = ({className}) => {
 
     const [posts, setPosts] = useState([])
+    const [page, setPage] = useState(1)
+    const [lastPage, setLastPage] = useState(1) 
     const requestServer = useServerRequest()
+    
     
 
     useEffect(() => {
 
-            requestServer('fetchPosts') 
-            .then((posts) => {
-            setPosts(posts.res)
+            requestServer('fetchPosts', page , PAGINATION_LIMIT) 
+            .then(({res:{posts , total}}) => {        
+            setPosts(posts)
+            setLastPage(total / PAGINATION_LIMIT.isInteger? total / PAGINATION_LIMIT : Math.ceil(total / PAGINATION_LIMIT))
         })
 
-    },[])
+    },[requestServer,page])
 
-    
+   
+
     
     return (
         <div className={className}>
@@ -28,7 +35,7 @@ const MainContainer = ({className}) => {
                 id = "search" 
                 color = "#070707ff" 
                 size = "25"/>
-                <Input width = "400px" />
+                <Input width = "400px" placeholder = "Поиск..." />
             </div>
             <div className="posts">
             {posts.map((post) => {
@@ -39,6 +46,7 @@ const MainContainer = ({className}) => {
                 )
             } )}
             </div>
+            {lastPage === 1? '' :<Pagination setPage = {setPage} lastPage = {lastPage} page={page}/>}
         </div>
     )}
 
@@ -48,8 +56,8 @@ const MainContainer = ({className}) => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 60px;
-    margin: 0 0 100px 0;
+    gap: 50px;
+    margin: 30px 0 50px 0;
     
     & .posts{
     margin: 0 auto;

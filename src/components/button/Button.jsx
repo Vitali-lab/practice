@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const ButtonContainer = ({children, className, width, ...props}) => {
     return(
-        <button className={className} type="button" {...props} >{children}</button>
+        <button  className={className} type="button" {...props} >{children}</button>
     )
 }
 
