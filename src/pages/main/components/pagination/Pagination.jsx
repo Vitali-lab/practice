@@ -31,6 +31,9 @@ export const Pagination = styled(PaginationContainer)`
 display: flex;
 align-items: center;
 justify-content: center;
+
+
+
 gap: 10px;
 padding: 10px 0;
 font-size: 20px;

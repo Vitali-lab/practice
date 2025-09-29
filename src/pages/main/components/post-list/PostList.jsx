@@ -39,7 +39,7 @@ export const PostList = styled(PostListContainer)`
     border: 1px solid #313131ff;
     cursor: pointer;
     font-size: 10px;
-    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    border-radius:  0 0 10px 10px;
     max-width: 300px
     height: 400px
     

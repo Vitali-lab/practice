@@ -56,7 +56,7 @@ align-items: start;
 justify-content: center;
 gap: 20px;
 color: #ffffffff;
-padding: 5px;
+padding: 5px 0;
 & .comment {
 width: 100%;
 display: flex;

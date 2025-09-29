@@ -1,43 +1,48 @@
 import { Input,Icon } from "../../components"
+import { Search } from "./components/search/Search"
 import { PostList } from "./components/post-list/PostList"
 import { Pagination } from "./components/pagination/Pagination"
 import { useServerRequest } from "../../hooks"
 import { PAGINATION_LIMIT } from "../../bff/constants"
-import { useEffect,useState } from "react"
+import  { debounce } from "../main/utils/debounce"
+import { useEffect,useState, useMemo } from "react"
 import styled from "styled-components"
 
 const MainContainer = ({className}) => {
 
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1)
-    const [lastPage, setLastPage] = useState(1) 
+    const [lastPage, setLastPage] = useState(1)
+    const [shouldSearch, setShouldSearch] = useState(false) 
+    const [searchPhrase , setSearchPhrase] = useState('')
     const requestServer = useServerRequest()
     
     
 
     useEffect(() => {
 
-            requestServer('fetchPosts', page , PAGINATION_LIMIT) 
+            requestServer('fetchPosts',searchPhrase, page , PAGINATION_LIMIT) 
             .then(({res:{posts , total}}) => {        
             setPosts(posts)
             setLastPage(total / PAGINATION_LIMIT.isInteger? total / PAGINATION_LIMIT : Math.ceil(total / PAGINATION_LIMIT))
         })
 
-    },[requestServer,page])
+    },[requestServer,page, shouldSearch])
 
-   
+    const startDebounce = useMemo(() => debounce(setShouldSearch, 1000),[])
+
+   const onSearch = ({target}) => { 
+       setSearchPhrase(target.value)
+       startDebounce(!shouldSearch)
+       
+    }
 
     
     return (
         <div className={className}>
-            <div className="search">
-                <Icon 
-                id = "search" 
-                color = "#070707ff" 
-                size = "25"/>
-                <Input width = "400px" placeholder = "Поиск..." />
-            </div>
-            <div className="posts">
+            <Search searchPhrase = {searchPhrase} onChange = {onSearch}/>
+            {posts.length ? (
+                <div className="posts">
             {posts.map((post) => {
                 return (
                     <div key={post.id}>
@@ -46,7 +51,12 @@ const MainContainer = ({className}) => {
                 )
             } )}
             </div>
-            {lastPage === 1? '' :<Pagination setPage = {setPage} lastPage = {lastPage} page={page}/>}
+            ) : (
+                <div className="no-posts">Постов не найдено</div>
+            )}
+           <div className="pagination">
+             {lastPage === 1|| !posts.length ? '' :<Pagination setPage = {setPage} lastPage = {lastPage} page={page}/>}
+           </div>
         </div>
     )}
 
@@ -55,10 +65,16 @@ const MainContainer = ({className}) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 50px;
-    margin: 30px 0 50px 0;
+    height: 100%;
+    padding: 0 0 110px 0;
     
+    & .pagination{
+    position: absolute;
+    bottom: 130px;
+    }
+   
     & .posts{
     margin: 0 auto;
     display: flex;
@@ -91,4 +107,10 @@ const MainContainer = ({className}) => {
             left: 770px;
             top: 10px
         }     
+         & .no-posts {
+         font-size: 25px;
+         margin: 0 auto;
+         margin-top: 100px;
+         
+         }   
     `
