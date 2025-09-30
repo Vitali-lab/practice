@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
 import { UserRow, TableRow,  } from "./components"
-import { Content } from "../../components"
+import { PrivateContent } from "../../components"
 import { useServerRequest } from "../../hooks"
+import { checkAccess } from "../../utils"
+import { selectUserRole } from "../../selectors"
+import { useSelector } from "react-redux"
 import styled from "styled-components"  
 import { ROLE } from "../../bff/constants"
 
@@ -12,12 +15,18 @@ const UsersContainer = ({className}) => {
     const [users , setUsers] = useState([])
     const [errorMessage, setErrorMessage] = useState(null)
     const [shouldUpdateUsers, setShouldUpdateUsers] = useState(false)
-
+    const userRole = useSelector(selectUserRole)
     const requestServer = useServerRequest()
-
      
+  
     
     useEffect(() => {
+
+      if(!checkAccess([ROLE.ADMIN], userRole)){
+        
+        return
+      }
+
         Promise.all([
             requestServer('fetchUsers'), 
             requestServer('fetchRoles') ])
@@ -36,6 +45,11 @@ const UsersContainer = ({className}) => {
     },[requestServer , shouldUpdateUsers])
 
     const onUserRemove = (userId) => {
+
+       if(!checkAccess([ROLE.ADMIN], userRole)){
+        return
+      }
+
          requestServer('removeUser', userId)
     .then(() => {
       setShouldUpdateUsers(!shouldUpdateUsers)
@@ -46,7 +60,7 @@ const UsersContainer = ({className}) => {
 
     return(
         <div className={className}>
-          <Content error={errorMessage}>
+          <PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
             <h2>Пользователи</h2>
             <div>
                 <TableRow theme={{borderRadius: '10px 10px 0 0'}}>
@@ -66,7 +80,7 @@ const UsersContainer = ({className}) => {
                 onUserRemove={() => onUserRemove(userId)}
                 />
                  ))}
-            </Content>
+            </PrivateContent>
         </div>
     )
 }
@@ -76,7 +90,7 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-top: 100px;
+
 font-size: 18px;
 
     

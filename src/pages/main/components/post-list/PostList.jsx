@@ -1,13 +1,23 @@
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../../../components"
+import { motion } from "framer-motion"
 import styled from "styled-components";
 
 const PostListContainer = ({ className, post:{id , title , imageUrl , content, publishedAt , commentsCount} }) => {
 
     const navigate = useNavigate()
 
+ 
+
+
     return (
-        <div className={className} key={id} onClick={() => navigate(`/post/${id}`)}>
+        <motion.div
+         whileHover={{scale: 1.08}}
+         whileTap={{scale: 0.95}}
+         transition={{type: "spring", stiffness: 400, damping: 17}}
+
+
+         className={className} key={id} onClick={() => navigate(`/post/${id}`)}>
             <div className="image">
             <img src={imageUrl || " "} alt={title}/>
             </div>
@@ -30,7 +40,7 @@ const PostListContainer = ({ className, post:{id , title , imageUrl , content, p
             </div>
             </div>
             
-        </div>
+        </motion.div>
     )
 };
 

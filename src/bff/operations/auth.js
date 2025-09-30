@@ -4,14 +4,13 @@ import { sessions } from "../sessions";
 export const auth = async (authLogin, authPassword) => {
   const user = await getUser(authLogin);
 
-  const { id, login, password, role_id } = user;
-
   if (!user) {
     return {
       error: "такой пользователь не найден",
       res: null,
     };
   }
+  const { id, login, password, role_id } = user;
 
   if (authPassword !== password) {
     return {

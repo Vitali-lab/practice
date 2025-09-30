@@ -5,6 +5,7 @@ import { Pagination } from "./components/pagination/Pagination"
 import { useServerRequest } from "../../hooks"
 import { PAGINATION_LIMIT } from "../../bff/constants"
 import  { debounce } from "../main/utils/debounce"
+import { motion } from "framer-motion"
 import { useEffect,useState, useMemo } from "react"
 import styled from "styled-components"
 
@@ -37,20 +38,46 @@ const MainContainer = ({className}) => {
        
     }
 
+       const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.04,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.36 },
+  },
+};
+
     
     return (
         <div className={className}>
             <Search searchPhrase = {searchPhrase} onChange = {onSearch}/>
             {posts.length ? (
-                <div className="posts">
+                <motion.div
+                 variants={container}
+                 initial="hidden"
+                 animate="visible"
+                 style={{ listStyle: 'none', margin: 0, padding: 0 }} 
+                className="posts">
             {posts.map((post) => {
                 return (
-                    <div key={post.id}>
+                    <motion.div key={post.id} variants={item}>
                       <PostList post={post} />
-                    </div>
+                    </motion.div>
                 )
             } )}
-            </div>
+            </motion.div>
             ) : (
                 <div className="no-posts">Постов не найдено</div>
             )}
@@ -76,15 +103,17 @@ const MainContainer = ({className}) => {
     }
    
     & .posts{
+    position: relative;
+    left: 10%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     width: 100%;
     gap: 40px;
-    padding: 0 0 0 110px;}
+    }
     & img {
         width: 300px;
         height: 200px;
