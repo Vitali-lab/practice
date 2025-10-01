@@ -4,6 +4,10 @@ import { useState } from "react"
 import { Modal, Button } from "../../../../../components"
 import { removeCommentAsync } from "../../../../../actions"
 import { useServerRequest } from "../../../../../hooks"
+import { ROLE } from "../../../../../bff/constants/role"
+import { checkAccess } from "../../../../../utils/check-access"
+import { selectUserRole } from "../../../../../selectors"
+import { useSelector } from "react-redux"
 import styled from "styled-components"
 
 
@@ -12,6 +16,12 @@ const CommentContainer  = ( {className , id , author , content, publishedAt, pos
     const dispatch = useDispatch()
     const requestServer = useServerRequest()
     const [onOpenModal, setOnOpenModal] = useState(false)
+
+    const roleId = useSelector(selectUserRole)
+    const isAdminOrModerator = checkAccess([ROLE.ADMIN, ROLE.MODERATOR], roleId);
+
+
+
     const onRemoveComment =  ( id ) => { 
           setOnOpenModal(false)
           dispatch(removeCommentAsync(requestServer, postId, id))
@@ -40,7 +50,7 @@ const CommentContainer  = ( {className , id , author , content, publishedAt, pos
             </div>
             <div className="content">{content}</div>
             </div>
-            <Icon id='trash-o' color="#c70303ff" size = "25" onClick={()=>{setOnOpenModal(true)}}/>
+            {isAdminOrModerator && <Icon id="trash-o" color = "rgba(173, 8, 8, 1)" size = "25" onClick={() => setOnOpenModal(true)}/>}
             
         </div>
     )

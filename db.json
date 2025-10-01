@@ -13,6 +13,13 @@
       "password": "123456",
       "registered_at": "2018-01-01",
       "role_id": 2
+    },
+    {
+      "login": "Petya",
+      "password": "123123",
+      "registered_at": "2025-10-01 08:05",
+      "role_id": 2,
+      "id": "LU8a06s"
     }
   ],
   "roles": [
@@ -185,11 +192,18 @@
       "content": "3"
     },
     {
-      "author_id": "2",
+      "author_id": "LU8a06s",
       "post_id": "1",
-      "published_at": "2025-09-30 10:51",
-      "content": "hello\n",
-      "id": "18IZJ2w"
+      "published_at": "2025-10-01 08:05",
+      "content": "ya Petya\n",
+      "id": "i7Aii7K"
+    },
+    {
+      "author_id": "1",
+      "post_id": "7ce5",
+      "published_at": "2025-10-01 08:13",
+      "content": "123123",
+      "id": "D1ErSaQ"
     }
   ],
   "sessions": [
@@ -205,15 +219,15 @@
       }
     },
     {
-      "hash": "0.06637924502439251916996454383479431271553039550781",
+      "hash": "0.94516270683341074843042406428139656782150268554688",
       "user": {
-        "id": "2",
-        "login": "Victor",
+        "id": "1",
+        "login": "Vitali",
         "password": "123456",
         "registered_at": "2018-01-01",
-        "role_id": 2
+        "role_id": 0
       },
-      "id": "148870B"
+      "id": "-Z34ZeS"
     }
   ]
 }

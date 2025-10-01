@@ -7,6 +7,7 @@ import { ROLE } from "../../../../bff/constants/role"
 import { selectUserRole } from "../../../../selectors/select-user-role"
 import { selectUserLogin } from "../../../../selectors/select-user-login"
 import { logout } from "../../../../actions"
+import { checkAccess } from "../../../../utils/check-access"
 import { selectUserSession } from "../../../../selectors/select-user-session"
 
 
@@ -37,6 +38,7 @@ const UserName = styled.div`
     const login = useSelector(selectUserLogin);
     const dispatch = useDispatch();
     const session = useSelector(selectUserSession);
+    const isAdmin = checkAccess([ROLE.ADMIN], roleId);
     
     const onLogOut = () => {
       dispatch(logout(session))
@@ -57,8 +59,11 @@ const UserName = styled.div`
     <div onClick={() => navigate(-1)}>
         <Icon id = "backward" size = "25" margin = "0 25px 0 0"  />
     </div>
-    <Link to={"/post"}><Icon id = "file-text-o" size = "25" margin = "0 25px 0 0" /></Link>
-    <Link to={"/users"}><Icon id = "users" size = "25" margin = "0 0px 0 " /></Link>
+      {isAdmin && 
+      <>
+      <Link to={"/post"}><Icon id = "file-text-o" size = "25" margin = "0 25px 0 0" /></Link>
+      <Link to={"/users"}><Icon id = "users" size = "25" margin = "0 0px 0 " /></Link>
+      </>}
            </RightAlignet>
         </div>
     )

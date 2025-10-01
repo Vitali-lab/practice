@@ -14,6 +14,7 @@ const PostContentContainer = ( {className, post:{id , title , imageUrl , content
   const dispatch = useDispatch()
   const requestServer = useServerRequest()
   const [onOpenModal, setOnOpenModal] = useState(false)
+  
 
   
      const openModal = () => {

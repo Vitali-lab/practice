@@ -1,9 +1,14 @@
 import { Icon } from "../../../../components/Icon/Icon"
+import { ROLE } from "../../../../bff/constants/role"
+import { selectUserRole } from "../../../../selectors/select-user-role"
+import { useSelector } from "react-redux"
+import { checkAccess } from "../../../../utils/check-access"
 import styled from "styled-components"
 
 const SpecialPanelContainer = ({className, publishedAt, editButton, onDeleteButton}) => {
-
-    
+ 
+     const roleId = useSelector(selectUserRole);
+     const isAdmin = checkAccess([ROLE.ADMIN], roleId);
     
     return(
         <div className={className}>
@@ -15,10 +20,11 @@ const SpecialPanelContainer = ({className, publishedAt, editButton, onDeleteButt
                         {publishedAt}
                         </> : ''} 
                        </div>
+                      {isAdmin && 
                       <div className="buttons">
                         {editButton}
                        {publishedAt &&  <Icon id="trash-o" color = "#000000ff" size = "25" onClick={onDeleteButton}/>}
-                        </div>
+                        </div>}
                       
                     </div>
         </div>

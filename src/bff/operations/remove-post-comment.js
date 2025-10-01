@@ -1,5 +1,5 @@
 import { sessions } from "../sessions";
-import { deleteComment, getComments, getPost } from "../api";
+import { deleteComment, getComments, getPost, getUsers } from "../api";
 import { ROLE } from "../constants";
 
 export const removePostComment = async (hash, postId, id) => {
@@ -19,6 +19,14 @@ export const removePostComment = async (hash, postId, id) => {
 
   const comments = await getComments(postId);
 
+  const users = await getUsers();
+
+  const commentsWithAuthor = comments.map((comment) => {
+    const user = users.find((user) => user.id === comment.author_id);
+
+    return { ...comment, author: user?.login };
+  });
+
   if (!post) {
     return {
       error: "Пост не найден",
@@ -28,6 +36,9 @@ export const removePostComment = async (hash, postId, id) => {
 
   return {
     error: null,
-    res: { ...post, comments },
+    res: {
+      ...post,
+      comments: commentsWithAuthor,
+    },
   };
 };
