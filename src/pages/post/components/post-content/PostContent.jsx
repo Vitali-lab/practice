@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { removePostAsync } from "../../../../actions" 
 import { useServerRequest } from "../../../../hooks"
+import PropTypes from "prop-types";
 import styled from "styled-components"
 
 const PostContentContainer = ( {className, post:{id , title , imageUrl , content, publishedAt} } ) => {
@@ -63,3 +64,6 @@ export const PostContent = styled(PostContentContainer)`
   }
 
   `
+  PostContent.propTypes = {
+    post: PropTypes.object.isRequired
+  }

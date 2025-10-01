@@ -1,5 +1,5 @@
 
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 
@@ -21,3 +21,11 @@ transition: color 0.2s ease-in-out;
     color:${({hoverColor = '#8b92e7ff'}) => hoverColor};
   }
 `
+Icon.propTypes = {
+    id: PropTypes.string.isRequired,
+    size: PropTypes.number,
+    margin: PropTypes.string,
+    color: PropTypes.string,
+    disabled: PropTypes.bool,
+    hoverColor: PropTypes.string,
+}

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import PropTypes from "prop-types";
 import { Button } from "../button/Button"
  
 const ModalContainer = ( { className, text, confirm,id ,cancel} ) => {
@@ -55,3 +56,9 @@ gap: 20px;
     
     }
 `
+Modal.propTypes = {
+    text: PropTypes.string.isRequired,
+    confirm: PropTypes.func.isRequired,
+    cancel: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+}

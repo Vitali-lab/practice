@@ -1,5 +1,5 @@
 import { Button } from "../../../../components";
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 
@@ -44,3 +44,8 @@ font-size: 20px;
 
 }
 `
+Pagination.propTypes = {
+    page: PropTypes.number,
+    setPage: PropTypes.func,
+    lastPage: PropTypes.number
+}

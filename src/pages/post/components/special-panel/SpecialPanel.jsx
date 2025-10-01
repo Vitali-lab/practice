@@ -3,6 +3,7 @@ import { ROLE } from "../../../../bff/constants/role"
 import { selectUserRole } from "../../../../selectors/select-user-role"
 import { useSelector } from "react-redux"
 import { checkAccess } from "../../../../utils/check-access"
+import PropTypes from "prop-types";
 import styled from "styled-components"
 
 const SpecialPanelContainer = ({className, publishedAt, editButton, onDeleteButton}) => {
@@ -56,3 +57,9 @@ export const SpecialPanel = styled(SpecialPanelContainer)`
     margin-bottom: 0px;
     }
 `
+
+SpecialPanel.propTypes = {
+    publishedAt: PropTypes.string,
+    editButton: PropTypes.element,
+    onDeleteButton: PropTypes.func
+}

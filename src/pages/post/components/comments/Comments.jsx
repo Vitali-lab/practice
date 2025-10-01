@@ -9,6 +9,7 @@ import { ROLE } from "../../../../bff/constants/role"
 import { checkAccess } from "../../../../utils/check-access"
 import { selectUserRole } from "../../../../selectors"
 import styled from "styled-components"
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom"
 
 
@@ -136,3 +137,9 @@ margin-top: 50px;
   }
 }
 `
+
+Comments.propTypes = {
+    className: PropTypes.string,
+    comments: PropTypes.array,
+    postId: PropTypes.number
+}

@@ -1,4 +1,5 @@
 import { forwardRef } from "react"
+import PropTypes from "prop-types";
 import styled from "styled-components"
 
 
@@ -28,3 +29,9 @@ export const Input = styled(InputContainer) `
         
     }
 `
+
+Input.propTypes = {
+    children: PropTypes.node.isRequired,
+    width: PropTypes.string,
+    bgColor: PropTypes.string,
+}

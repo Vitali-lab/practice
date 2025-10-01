@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TableRow } from "../table-row/TableRow";
 import { useServerRequest } from "../../../../hooks";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const UserRowContainer = ({
@@ -84,3 +85,12 @@ gap: 10px;
 
 
 `;
+
+UserRow.propTypes = {
+  userId: PropTypes.number.isRequired,
+  login: PropTypes.string.isRequired,
+  registered_at: PropTypes.string.isRequired,
+  userRoleID: PropTypes.number.isRequired,
+  roles: PropTypes.array.isRequired,
+  onUserRemove: PropTypes.func.isRequired,
+};

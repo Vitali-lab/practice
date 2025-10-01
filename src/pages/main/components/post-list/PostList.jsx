@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../../../components"
 import { motion } from "framer-motion"
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const PostListContainer = ({ className, post:{id , title , imageUrl , content, publishedAt , commentsCount} }) => {
@@ -94,3 +95,6 @@ export const PostList = styled(PostListContainer)`
           padding: 3px;
       }  
 `;
+PostList.propTypes = {
+    post: PropTypes.object.isRequired,
+}

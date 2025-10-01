@@ -9,6 +9,7 @@ import { useServerRequest } from "../../../../hooks"
 import { removePostAsync } from "../../../../actions"
 import { Modal } from "../../../../components"
 import { sanitizeContent } from "./utils"
+import PropTypes from "prop-types";
 import styled from "styled-components"
 
 const PostFormContainer = ( {className, post:{id , title , imageUrl , content, publishedAt} } ) => {
@@ -99,3 +100,7 @@ export const PostForm = styled(PostFormContainer)`
    
  
   `
+
+  PostForm.propTypes = {
+    post: PropTypes.object.isRequired
+  }

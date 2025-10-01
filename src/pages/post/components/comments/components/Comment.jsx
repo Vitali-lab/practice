@@ -8,6 +8,7 @@ import { ROLE } from "../../../../../bff/constants/role"
 import { checkAccess } from "../../../../../utils/check-access"
 import { selectUserRole } from "../../../../../selectors"
 import { useSelector } from "react-redux"
+import PropTypes from "prop-types";
 import styled from "styled-components"
 
 
@@ -111,3 +112,11 @@ gap: 20px;
 
 
 `
+
+Comment.propTypes = {
+    id: PropTypes.number,
+    author: PropTypes.string,
+    content: PropTypes.string,
+    publishedAt: PropTypes.string,
+    postId: PropTypes.number
+}   

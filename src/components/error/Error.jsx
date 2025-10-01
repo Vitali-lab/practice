@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const ErrorContainer = ({error, className}) => {
@@ -17,3 +18,8 @@ export const Error = styled(ErrorContainer)`
   transform: translate(-50%, -50%);
   text-align: center;
 `;
+
+Error.propTypes = {
+    error: PropTypes.oneOfType([PropTypes.string, PropTypes.exact(null)]),
+    
+};
