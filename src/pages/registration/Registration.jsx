@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { server } from "../../bff";
 import { useState } from "react";
-import { Input,Button,ErrorMassage } from "../../components";
+import { Input,Button,ErrorMessage } from "../../components";
 import { Link, Navigate } from "react-router-dom";
 import styled  from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -115,7 +115,7 @@ export const RegistrationContainer = ( { className }) => {
                 onChange: () => setServerError(null) 
             })} />
             <Button type="submit" disabled={!!formError} > Зарегестрироваться  <i className="fa fa-sign-in"/></Button>
-            {errorMessage && <ErrorMassage>{errorMessage}</ErrorMassage>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <Button><Link to="/login">Войти <i className="fa fa-user-plus"/></Link></Button>
             
          </AuthForm>

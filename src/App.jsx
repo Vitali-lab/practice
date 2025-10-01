@@ -1,14 +1,17 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import {  useLayoutEffect  } from 'react'
 import './App.css'
 import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
-import { Header, Footer } from './components'
+import { Header, Footer,Error } from './components'
 import { Auth } from './pages/authorization/Auth'
 import { Registration } from './pages/registration/Registration'
 import { Users } from './pages/users/Users'
 import { Post } from './pages/post/Post'
 import { useDispatch } from 'react-redux'
 import { setUser } from './actions'
+import { number } from 'yup'
+import { Main } from './pages/main/ Main'
+import { ERROR } from './bff/constants'
 
 
 
@@ -43,10 +46,16 @@ export const  Blog = () => {
     if(!currentUserData){
       return
     }
+
+    
     dispatch(setUser({...currentUserData,
-      roleId:Number(currentUserData.role_id)
+      roleId:Number(currentUserData.roleId)
     })) 
-   },[dispatch])
+   },[dispatch]) 
+  
+
+
+  
   
 
 
@@ -57,13 +66,14 @@ export const  Blog = () => {
     <Header />
     <Page>
        <Routes>
-        <Route path='/' element ={<div>Главная</div>}/>
+        <Route path='/' element ={<Main/>}/>
         <Route path='/login' element ={<Auth />}/>
         <Route path='/register' element ={<Registration/>}/>
         <Route path='/users' element ={<Users/>}/>
-        <Route path='/post' element ={<div>Новая статья</div>}/>
+        <Route path='/post' element ={<Post/>}/>
         <Route path='/post/:id' element = {<Post/>}/>
-        <Route path='*' element ={<div>Ошибка</div>}/>
+        <Route path='/post/:id/edit' element = {<Post/>}/>
+        <Route path='*' element ={<Error error={ERROR.PAGE_NOT_EXISTS}/>}/>
        </Routes>
     </Page>
     <Footer />
@@ -75,6 +85,7 @@ export const  Blog = () => {
    
   )
 }
+
 
 
 

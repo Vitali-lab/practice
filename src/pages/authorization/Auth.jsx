@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { server } from "../../bff";
 import { useState } from "react";
-import { Input,Button,ErrorMassage } from "../../components";
+import { Input,Button,ErrorMessage } from "../../components";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../actions";
@@ -104,7 +104,7 @@ export const AuthContainer = ( { className }) => {
                 onChange: () => setServerError(null) 
             })} />
             <Button type="submit" disabled={!!formError} >Войти  <i className="fa fa-sign-in"/></Button>
-            {errorMessage && <ErrorMassage>{errorMessage}</ErrorMassage>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <Button><Link to="/register">Регистрация <i className="fa fa-user-plus"/></Link></Button>
             
          </AuthForm>

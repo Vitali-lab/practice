@@ -13,7 +13,7 @@ const fadeIn = keyframes`
   }
 `
 
-export const ErrorMassage = styled.div`
+export const ErrorMessage = styled.div`
     background-color: #e66051ff;
     width: 300px;
     height: 80px;

@@ -1,5 +1,5 @@
 
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 
@@ -14,10 +14,18 @@ import styled from "styled-components";
 export const Icon = styled(IconContainer)`
 font-size: ${({size = '25'}) => size}px;
 margin: ${({margin = '0'}) => margin};
-color: ${({color = '#fff',disabled}) => disabled ? '#ccc' : color}};
+color: ${({color = '#fff',disabled}) => disabled ? '#cc11c' : color}};
 text-align: center;
 transition: color 0.2s ease-in-out;
   &:hover {
     color:${({hoverColor = '#8b92e7ff'}) => hoverColor};
   }
 `
+Icon.propTypes = {
+    id: PropTypes.string.isRequired,
+    size: PropTypes.number,
+    margin: PropTypes.string,
+    color: PropTypes.string,
+    disabled: PropTypes.bool,
+    hoverColor: PropTypes.string,
+}

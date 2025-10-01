@@ -9,7 +9,6 @@ export const getWeather = async (setWeather, setLoading) => {
       setLoading(false);
     })
     .catch((error) => {
-      console.log(error);
       setLoading(false);
     })
 

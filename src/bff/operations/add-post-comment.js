@@ -1,11 +1,12 @@
 import { sessions } from "../sessions";
-import { addComment, getComments } from "../api";
+import { addComment, getComments, getPost, getUsers } from "../api";
 import { ROLE } from "../constants";
 
-export const addPostComment = async (userSession, userId, postId, content) => {
+export const addPostComment = async (hash, userId, postId, content) => {
   const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER];
 
-  if (!sessions.access(userSession, accessRoles)) {
+  const access = await sessions.access(hash, accessRoles);
+  if (!access) {
     return {
       error: "Доступ запрещён",
       res: null,
@@ -18,6 +19,14 @@ export const addPostComment = async (userSession, userId, postId, content) => {
 
   const comments = await getComments(postId);
 
+  const users = await getUsers();
+
+  const commentsWithAuthor = comments.map((comment) => {
+    const user = users.find((user) => user.id === comment.author_id);
+
+    return { ...comment, author: user?.login };
+  });
+
   if (!post) {
     return {
       error: "Пост не найден",
@@ -27,6 +36,9 @@ export const addPostComment = async (userSession, userId, postId, content) => {
 
   return {
     error: null,
-    res: { ...post, comments },
+    res: {
+      ...post,
+      comments: commentsWithAuthor,
+    },
   };
 };
